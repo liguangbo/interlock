@@ -37,7 +37,10 @@ func (p *NginxLoadBalancer) GenerateProxyConfig(containers []dockerclient.Contai
 
 		// context root
 		contextRoot := utils.ContextRoot(cInfo.Config)
-		contextRootName := strings.Replace(contextRoot, "/", "_", -1)
+		contextRootName := utils.ContextRootName(cInfo.Config)
+		if contextRootName == "" {
+			contextRootName = strings.Replace(contextRoot, "/", "_", -1)
+		}
 
 		if domain == "" && contextRoot == "" {
 			continue

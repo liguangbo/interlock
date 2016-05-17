@@ -25,6 +25,7 @@ const (
 	InterlockBackendOptionLabel       = "interlock.backend_option"         // haproxy
 	InterlockIPHashLabel              = "interlock.ip_hash"                // nginx
 	InterlockContextRootLabel         = "interlock.context_root"           // haproxy, nginx
+	InterlockContextRootNameLabel     = "interlock.context_root_name"      // haproxy
 	InterlockContextRootRewriteLabel  = "interlock.context_root_rewrite"   // haproxy, nginx
 )
 
