@@ -3,10 +3,10 @@ package nginx
 import (
 	"fmt"
 	"path/filepath"
-	"strings"
 
 	"github.com/ehazlett/interlock/ext/lb/utils"
 	"github.com/samalba/dockerclient"
+	"encoding/base64"
 )
 
 func (p *NginxLoadBalancer) GenerateProxyConfig(containers []dockerclient.Container) (interface{}, error) {
@@ -37,11 +37,12 @@ func (p *NginxLoadBalancer) GenerateProxyConfig(containers []dockerclient.Contai
 
 		// context root
 		contextRoot := utils.ContextRoot(cInfo.Config)
-		contextRootName := strings.Replace(contextRoot, "/", "_", -1)
+		contextRootName := base64.StdEncoding.EncodeToString([]byte(contextRoot))
 
 		if domain == "" && contextRoot == "" {
 			continue
 		}
+
 
 		// we check if a context root is passed and overwrite the
 		// domain component

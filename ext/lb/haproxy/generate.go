@@ -3,7 +3,7 @@ package haproxy
 import (
 	"fmt"
 	"strings"
-
+	"encoding/base64"
 	"github.com/ehazlett/interlock/ext/lb/utils"
 	"github.com/samalba/dockerclient"
 )
@@ -36,7 +36,7 @@ func (p *HAProxyLoadBalancer) GenerateProxyConfig(containers []dockerclient.Cont
 
 		// context root
 		contextRoot := utils.ContextRoot(cInfo.Config)
-		contextRootName := strings.Replace(contextRoot, "/", "_", -1)
+		contextRootName := base64.StdEncoding.EncodeToString([]byte(contextRoot))
 
 		if domain == "" && contextRoot == "" {
 			continue
