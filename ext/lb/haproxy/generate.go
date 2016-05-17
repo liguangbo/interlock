@@ -37,6 +37,7 @@ func (p *HAProxyLoadBalancer) GenerateProxyConfig(containers []dockerclient.Cont
 		// context root
 		contextRoot := utils.ContextRoot(cInfo.Config)
 		contextRootName := base64.StdEncoding.EncodeToString([]byte(contextRoot))
+		fmt.Println(contextRoot, "ContextRootName:"+contextRootName)
 
 		if domain == "" && contextRoot == "" {
 			continue
